@@ -1,4 +1,4 @@
-FROM php:5
+FROM php:7
 MAINTAINER sang@go1.com.au
 
 # Install modules
@@ -6,16 +6,15 @@ RUN apt-get update && apt-get install -y -qq libmcrypt-dev libicu-dev libxml2-de
     && docker-php-ext-install mcrypt pdo_mysql opcache mbstring intl soap pcntl && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Enable and configure xdebug
-RUN pecl install xdebug mongo
-RUN docker-php-ext-enable xdebug mongo
-# Download mailparse
-RUN pecl download mailparse-2.1.6 && tar -zxf mailparse-2.1.6.tgz && cd mailparse-2.1.6 && sed -i '/#if !HAVE_MBSTRING/c#if !HAVE_MBSTRING && false' mailparse.c && phpize && ./configure && make -j$(nproc) && make install
-RUN docker-php-ext-enable mailparse
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
+
 # Install tools (phpunit, xdebug, composer)
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require phpunit/phpunit:*
 
 RUN ln -s ~/.composer/vendor/bin/phpunit /usr/local/bin/phpunit
+
 # Setup env
 RUN echo 'date.timezone = UTC' >> /usr/local/etc/php/php.ini
