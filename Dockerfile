@@ -16,6 +16,7 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require phpunit/phpunit:*
 RUN composer global require phing/phing:*
+RUN curl -O http://files.drush.org/drush.phar && chmod +x drush.phar && mv drush.phar /usr/local/bin/drush
 
 RUN ln -s ~/.composer/vendor/bin/phpunit /usr/local/bin/phpunit
 RUN ln -s ~/.composer/vendor/bin/phing /usr/local/bin/phing
