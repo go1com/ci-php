@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y -qq libmcrypt-dev libicu-dev libxml2-de
     && docker-php-ext-install bcmath mcrypt mysql pdo_mysql opcache mbstring intl soap pcntl sockets curl zip xmlrpc && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Enable and configure xdebug
-RUN pecl install xdebug mongo && pecl download mailparse-2.1.6 && tar -zxf mailparse-2.1.6.tgz && cd mailparse-2.1.6 && sed -i '/#if !HAVE_MBSTRING/c#if !HAVE_MBSTRING && false' mailparse.c && phpize && ./configure && make -j$(nproc) && make install
+RUN pecl install memcache && docker-php-ext-enable memcache && pecl install memcached && docker-php-ext-enable memcached && pecl install xdebug mongo && pecl download mailparse-2.1.6 && tar -zxf mailparse-2.1.6.tgz && cd mailparse-2.1.6 && sed -i '/#if !HAVE_MBSTRING/c#if !HAVE_MBSTRING && false' mailparse.c && phpize && ./configure && make -j$(nproc) && make install
 RUN docker-php-ext-enable mailparse xdebug mongo
 # Install tools (phpunit, xdebug, composer)
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
