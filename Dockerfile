@@ -2,7 +2,7 @@ FROM php:5
 MAINTAINER sang@go1.com.au
 
 # Install modules
-RUN apt-get update && apt-get install -y -qq libmcrypt-dev libicu-dev libxml2-dev libssl-dev libcurl4-openssl-dev zlib1g-dev libxslt1-dev curl git-core unzip \
+RUN apt-get update && apt-get install -y -qq libmcrypt-dev libmemcached-dev libicu-dev libxml2-dev libssl-dev libcurl4-openssl-dev zlib1g-dev libxslt1-dev curl git-core unzip \
     && docker-php-ext-install bcmath mcrypt mysql pdo_mysql opcache mbstring intl soap pcntl sockets curl zip xmlrpc && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Enable and configure xdebug
