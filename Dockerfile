@@ -13,7 +13,7 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # Install tools (phpunit, xdebug, composer)
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
-RUN composer global require phpunit/phpunit:* && composer global require phing/phing:* && ln -s ~/.composer/vendor/bin/phpunit /usr/local/bin/phpunit && ln -s ~/.composer/vendor/bin/phing /usr/local/bin/phing
+RUN composer global require phpunit/phpunit:5.* && composer global require phing/phing:* && ln -s ~/.composer/vendor/bin/phpunit /usr/local/bin/phpunit && ln -s ~/.composer/vendor/bin/phing /usr/local/bin/phing
 RUN curl -O http://files.drush.org/drush.phar && chmod +x drush.phar && mv drush.phar /usr/local/bin/drush
 
 # Setup env
