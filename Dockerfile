@@ -1,7 +1,7 @@
 FROM php:7-alpine
 
 ENV MODULES_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev libmcrypt-dev libxml2-dev icu-dev
-RUN apk add --no-cache --update libmemcached-libs zlib icu-libs libmcrypt curl openssh-client git \
+RUN apk add --no-cache --update libmemcached-libs zlib icu-libs libmcrypt curl bash git openssh-client \
     && set -xe \
     && apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
     && apk add --no-cache --update --virtual .modules-deps $MODULES_DEPS \
