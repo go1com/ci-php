@@ -1,13 +1,13 @@
-FROM php:7.1-alpine
+FROM php:7.2-alpine
 
 ENV MODULES_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev libmcrypt-dev libxml2-dev icu-dev
 RUN apk add --no-cache --update libmemcached-libs zlib icu-libs libmcrypt curl bash git graphviz openssh-client \
     && set -xe \
     && apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
     && apk add --no-cache --update --virtual .modules-deps $MODULES_DEPS \
-    && pecl install memcached xdebug \
+    && pecl install memcached xdebug-beta \
     && docker-php-ext-enable memcached xdebug \
-    && docker-php-ext-install -j $(getconf _NPROCESSORS_ONLN) bcmath mcrypt pdo_mysql mbstring intl soap pcntl \
+    && docker-php-ext-install -j $(getconf _NPROCESSORS_ONLN) bcmath pdo_mysql intl soap pcntl \
     && rm -rf /usr/share/php7 \
     && rm -rf /tmp/* \
     && apk del .modules-deps .phpize-deps \
