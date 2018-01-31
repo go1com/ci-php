@@ -16,8 +16,10 @@ RUN apk add --no-cache --update libmemcached-libs zlib icu-libs libmcrypt curl b
     && composer global require phpunit/phpunit:* \
     && composer global require phing/phing:* \
     && composer global require phpmetrics/phpmetrics:* \
+    && composer global require go1/deploy-helper:* \
     && ln -s ~/.composer/vendor/bin/phpunit /usr/local/bin/phpunit \
     && ln -s ~/.composer/vendor/bin/phing /usr/local/bin/phing \
     && ln -s ~/.composer/vendor/bin/phpmetrics /usr/local/bin/phpmetrics \
+    && ln -s ~/.composer/vendor/bin/deploy-helper /usr/local/bin/deploy-helper \
     && curl -O http://files.drush.org/drush.phar && chmod +x drush.phar && mv drush.phar /usr/local/bin/drush \
     && echo 'date.timezone = UTC' >> /usr/local/etc/php/conf.d/tz.ini
