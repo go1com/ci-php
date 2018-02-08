@@ -15,6 +15,8 @@ RUN apk add --no-cache --update libmemcached-libs zlib icu-libs libmcrypt curl b
     && mv composer.phar /usr/local/bin/composer \
     && composer global require phpunit/phpunit:* \
     && composer global require phpmetrics/phpmetrics:* \
+    && composer global require go1/deploy-helper:* \
     && ln -s ~/.composer/vendor/bin/phpunit /usr/local/bin/phpunit \
     && ln -s ~/.composer/vendor/bin/phpmetrics /usr/local/bin/phpmetrics \
+    && ln -s ~/.composer/vendor/bin/deploy-helper /usr/local/bin/deploy-helper \
     && echo 'date.timezone = UTC' >> /usr/local/etc/php/conf.d/tz.ini
