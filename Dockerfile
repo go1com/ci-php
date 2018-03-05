@@ -7,7 +7,7 @@ RUN apk add --no-cache --update libmemcached-libs zlib icu-libs libmcrypt curl b
     && apk add --no-cache --update --virtual .modules-deps $MODULES_DEPS \
     && pecl install memcached xdebug \
     && docker-php-ext-enable memcached xdebug \
-    && docker-php-ext-install -j $(getconf _NPROCESSORS_ONLN) bcmath pdo_mysql intl soap pcntl \
+    && docker-php-ext-install -j $(getconf _NPROCESSORS_ONLN) bcmath pdo_mysql intl soap pcntl zip \
     && rm -rf /usr/share/php7 \
     && rm -rf /tmp/* \
     && apk del .modules-deps .phpize-deps \
